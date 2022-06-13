@@ -25,41 +25,5 @@ namespace BussinessLayer.Services
                 throw;
             }
         }
-
-        public bool ForgetPassword(string Email)
-        {
-            try
-            {
-                return this.userRL.ForgetPassword(Email);
-            }
-            catch(Exception)
-            {
-                throw;
-            }
-        }
-
-        public string LoginUser(string Email, string Password)
-        {
-            try
-            {
-                return this.userRL.LoginUser(Email, Password);
-            }
-            catch(Exception)
-            {
-                throw;
-            }
-        }
-
-        public bool ResetPassword(string Email, PasswordModel passwordModel)
-        {
-            try
-            {
-                return this.userRL.ResetPassword(Email, passwordModel);
-            }
-            catch(Exception)
-            {
-                throw;
-            }
-        }
     }
 }

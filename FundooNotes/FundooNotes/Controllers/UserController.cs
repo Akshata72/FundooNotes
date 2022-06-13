@@ -50,44 +50,5 @@ namespace FundooNotes.Controllers
                 throw;
             }
         }
-        [HttpPost("ForgetPassword/{Email}")]
-        public ActionResult ForgetPassword(string Email)
-        {
-            try
-            {
-                var user = fundooContext.User.FirstOrDefault(u => u.Email == Email);
-                if (user == null)
-                {
-                    return this.BadRequest(new { success = false, message = "Email does not Exist" });
-                }
-                bool result =  this.userBL.ForgetPassword(Email);
-                return this.Ok(new { success = true, message = "Email has send" });
-            }
-            catch(Exception)
-            {
-                throw;
-            }
-        }
-        [Authorize]
-        [HttpPost("ResetPassword")]
-        public ActionResult ResetPassword(PasswordModel passwordModel)
-        {
-            try
-            {
-                var currentUser = HttpContext.User;
-                int userId = Convert.ToInt32(currentUser.Claims.FirstOrDefault(c => c.Type == "UserId").Value);
-                var Email = (currentUser.Claims.FirstOrDefault(c => c.Type == "Email").Value);
-                if(passwordModel.NewPassword!= passwordModel.ConfirmPassword)
-                {
-                    return this.BadRequest(new { success = false, message = "New Password and Confirm Password must be same" });
-                }
-                bool result = this.userBL.ResetPassword(Email, passwordModel);
-                return this.Ok(new { success = true, message = "Password change Successfully" });
-            }
-            catch(Exception)
-            {
-                throw;
-            }
-        }
     }
 }

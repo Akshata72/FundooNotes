@@ -26,5 +26,17 @@ namespace BussinessLayer.Services
                 Console.WriteLine(ex.InnerException.Message);
             }
         }
+
+        public async Task DeleteLabel(int UserId, int NoteId)
+        {
+            try
+            {
+                await lebelRL.DeleteLabel(UserId, NoteId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

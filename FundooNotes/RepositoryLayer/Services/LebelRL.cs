@@ -36,5 +36,23 @@ namespace RepositoryLayer.Services
                 Console.WriteLine(e.InnerException.Message);
             }
         }
+
+        public async Task DeleteLabel(int UserId, int NoteId)
+        {
+            try
+            {
+                Label label = new Label
+                {
+                    UserId = UserId,
+                    NoteId = NoteId
+                };
+                fundooContext.Label.Remove(label);
+                await fundooContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -80,8 +80,8 @@ namespace FundooNotes.Controllers
             {
                 var userid = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals("userId", StringComparison.InvariantCultureIgnoreCase));
                 int userId = Int32.Parse(userid.Value);
-                var note = fundooContext.Note.FirstOrDefault(u => u.UserId == userId && u.NoteId == NoteId);
-                if (note == null)
+                var collab = fundooContext.Note.FirstOrDefault(u => u.UserId == userId && u.NoteId == NoteId);
+                if (collab == null)
                 {
                     return this.BadRequest(new { success = false, message = "Unable to retrieve Delete collab." });
                 }

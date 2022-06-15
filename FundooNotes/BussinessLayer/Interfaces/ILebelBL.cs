@@ -8,5 +8,6 @@ namespace BussinessLayer.Interfaces
     public interface ILebelBL
     {
         Task CreateLebel(int UserId, int NoteId, string LebelName);
+        Task DeleteLabel(int UserId, int NoteId);
     }
 }

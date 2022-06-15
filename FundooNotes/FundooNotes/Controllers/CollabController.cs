@@ -38,8 +38,12 @@ namespace FundooNotes.Controllers
             {
                 var userid = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals("userId", StringComparison.InvariantCultureIgnoreCase));
                 int userId = Int32.Parse(userid.Value);
-                await this.collabBL.AddCollab(userId,NoteId, collabPostModel);
-                return this.Ok(new { success = true, message = $"Collab Added Successful" });
+                if(collabPostModel == null)
+                {
+                    await this.collabBL.AddCollab(userId, NoteId, collabPostModel);
+                    return this.Ok(new { success = true, message = $"Collab Added Successful" });
+                }
+                return this.BadRequest(new { success = false, message = $"Already CollabEmail is Added.." });
 
             }
             catch (Exception ex)

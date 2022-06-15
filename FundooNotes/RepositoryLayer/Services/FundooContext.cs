@@ -15,10 +15,14 @@ namespace RepositoryLayer.Services
         public DbSet<User> User { get; set; }
         public DbSet<Note> Note { get; set; }
         public DbSet<Collabrator> Collabrator { get; set; }
+        public DbSet<Label> Label { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
                modelBuilder.Entity<Collabrator>()
               .HasKey(t => new { t.UserId, t.NoteId });
-        }
+
+               modelBuilder.Entity<Label>()
+              .HasKey(t => new { t.UserId, t.NoteId });
+        } 
     }
 }

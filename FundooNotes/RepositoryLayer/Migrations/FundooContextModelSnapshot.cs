@@ -35,6 +35,22 @@ namespace RepositoryLayer.Migrations
                     b.ToTable("Collabrator");
                 });
 
+            modelBuilder.Entity("RepositoryLayer.Entities.Label", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NoteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LabelName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "NoteId");
+
+                    b.ToTable("Label");
+                });
+
             modelBuilder.Entity("RepositoryLayer.Entities.Note", b =>
                 {
                     b.Property<int>("NoteId")

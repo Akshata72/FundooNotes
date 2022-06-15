@@ -10,8 +10,8 @@ using RepositoryLayer.Services;
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(FundooContext))]
-    [Migration("20220613135817_Collab")]
-    partial class Collab
+    [Migration("20220614075100_Label")]
+    partial class Label
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,6 +35,22 @@ namespace RepositoryLayer.Migrations
                     b.HasKey("UserId", "NoteId");
 
                     b.ToTable("Collabrator");
+                });
+
+            modelBuilder.Entity("RepositoryLayer.Entities.Label", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NoteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LabelName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "NoteId");
+
+                    b.ToTable("Label");
                 });
 
             modelBuilder.Entity("RepositoryLayer.Entities.Note", b =>

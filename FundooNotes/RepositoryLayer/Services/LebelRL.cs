@@ -1,8 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using RepositoryLayer.Entities;
 using RepositoryLayer.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -52,6 +54,40 @@ namespace RepositoryLayer.Services
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public async Task<List<Label>> GetAllLabel(int UserId)
+        {
+            try
+            {
+                return await fundooContext.Label.Where(u => u.UserId == UserId).ToListAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task UpdateLabel(int UserId, int NoteId, string LebelName)
+        {
+            try
+            {
+                Label label = new Label
+                {
+                    UserId = UserId,
+                    NoteId = NoteId,
+                };
+                if (label == null)
+                {
+                    throw new Exception("No Label Exist");
+                }
+                label.LabelName = LebelName;
+                await fundooContext.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
     }

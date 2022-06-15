@@ -43,11 +43,7 @@ namespace RepositoryLayer.Services
         {
             try
             {
-                Label label = new Label
-                {
-                    UserId = UserId,
-                    NoteId = NoteId
-                };
+                var label = fundooContext.Label.FirstOrDefault(u=> u.UserId == UserId && u.NoteId == NoteId);
                 fundooContext.Label.Remove(label);
                 await fundooContext.SaveChangesAsync();
             }
@@ -69,15 +65,24 @@ namespace RepositoryLayer.Services
             }
         }
 
+        public async Task<Label> GetLabel(int UserId, int NoteId)
+        {
+            try
+            {
+                return await fundooContext.Label.Where(u => u.UserId == UserId && u.NoteId == NoteId).FirstOrDefaultAsync();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public async Task UpdateLabel(int UserId, int NoteId, string LebelName)
         {
             try
             {
-                Label label = new Label
-                {
-                    UserId = UserId,
-                    NoteId = NoteId,
-                };
+               var label = fundooContext.Label.FirstOrDefault(u => u.UserId == UserId && u.NoteId == NoteId);
                 if (label == null)
                 {
                     throw new Exception("No Label Exist");
